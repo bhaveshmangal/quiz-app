@@ -75,3 +75,12 @@ class ClassTest(models.Model):
 
     def __str__(self):
         return str(self.test_date)
+
+
+class StudentScore(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.PositiveIntegerField(null=True)
+    test = models.ForeignKey(ClassTest, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.student   

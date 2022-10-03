@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import StudentClass, User, ClassTest
+from .models import StudentClass, User, ClassTest, StudentScore
 
 class StudentClassSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,3 +38,9 @@ class ClassTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassTest
         fields = ('test_date', 'class_name')
+
+
+class StudentScoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentScore
+        fields = ('student', 'score', 'test')

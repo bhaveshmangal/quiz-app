@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from .models import StudentClass, User, ClassTest
-from .serializers import StudentClassSerializer, UserSerializer, UserTokenObtainPairSerializer, ClassTestSerializer
+from .models import StudentClass, User, ClassTest, StudentScore
+from .serializers import StudentClassSerializer, UserSerializer, UserTokenObtainPairSerializer, ClassTestSerializer, StudentScoreSerializer
 
 
 class StudentClassViewSet(viewsets.ModelViewSet):
@@ -32,4 +32,10 @@ class StudentViewSet(viewsets.ReadOnlyModelViewSet):
 class ClassTestViewSet(mixins.CreateModelMixin ,viewsets.GenericViewSet):
     queryset = ClassTest.objects.all()
     serializer_class = ClassTestSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class StudentScoreViewSet(viewsets.ModelViewSet):
+    queryset = StudentScore.objects.all()
+    serializer_class = StudentScoreSerializer
     permission_classes = (IsAuthenticated,)
