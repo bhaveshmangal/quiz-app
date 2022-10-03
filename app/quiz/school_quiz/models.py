@@ -11,6 +11,11 @@ class StudentClass(models.Model):
         return str(self.number) + self.section
 
 
+class StudentQuerySet(models.QuerySet):
+    def filter_by_student_class(self, studentclass):
+        return self.filter(class_name=studentclass)
+
+
 class QuizUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         """Create and save a User with the given email and password."""
@@ -63,17 +68,19 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
-    
-class StudentQuerySet(models.QuerySet):
-    def filter_by_student_class(self, class_name):
-        return self.filter(class_no=class_name)
 
-
-
-class QuizScore(models.Model):
-    score = models.FloatField(editable=True)
-    student = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    quiz_date = models.DateField(auto_now_add=True)
+class ClassTest(models.Model):
+    test_date = models.DateField()
+    class_name = models.ForeignKey(StudentClass, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.score)
+        return str(self.test_date)
+
+
+class StudentScore(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.PositiveIntegerField(null=True)
+    test = models.ForeignKey(ClassTest, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.student    

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from .models import StudentClass, User, QuizScore
+from .models import StudentClass, User, ClassTest, StudentScore
 
 class CustomModelAdmin(admin.ModelAdmin):
     def __init__(self, model, admin_site):
@@ -49,6 +49,10 @@ class UserAdmin(DjangoUserAdmin):
 class StudentClassAdmin(CustomModelAdmin):
     pass
 
-@admin.register(QuizScore)
-class QuizScoreAdmin(CustomModelAdmin):
+@admin.register(ClassTest)
+class ClassTestAdmin(CustomModelAdmin):
+    pass
+
+@admin.register(StudentScore)
+class StudentScoreAdmin(CustomModelAdmin):
     pass
