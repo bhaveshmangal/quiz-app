@@ -67,13 +67,3 @@ class User(AbstractUser):
 class StudentQuerySet(models.QuerySet):
     def filter_by_student_class(self, class_name):
         return self.filter(class_no=class_name)
-
-
-
-class QuizScore(models.Model):
-    score = models.FloatField(editable=True)
-    student = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    quiz_date = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return str(self.score)

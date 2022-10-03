@@ -1,17 +1,11 @@
 from rest_framework import serializers
 
-from .models import StudentClass, QuizScore, User
+from .models import StudentClass, User
 
 class StudentClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentClass
         fields = ('number', 'section', 'students')
-
-
-class QuizScoreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = QuizScore
-        fields = ('score', 'student', 'quiz_date')
 
 
 class UserSerializer(serializers.ModelSerializer):
