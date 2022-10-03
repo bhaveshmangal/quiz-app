@@ -67,3 +67,11 @@ class User(AbstractUser):
 class StudentQuerySet(models.QuerySet):
     def filter_by_student_class(self, class_name):
         return self.filter(class_no=class_name)
+
+
+class ClassTest(models.Model):
+    test_date = models.DateField()
+    class_name = models.ForeignKey(StudentClass, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.test_date)
